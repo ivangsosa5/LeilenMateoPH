@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://leilenmateo.com/sitemap.xml
+
+# Disallow admin areas (si se implementa CMS)
+Disallow: /admin/
+Disallow: /cms/
+
+# Allow all gallery pages
+Allow: /galeria/
+Allow: /soy-leilen
+Allow: /contacto
+
+# Crawl delay (opcional, para ser amigable con el servidor)
+Crawl-delay: 1
+
+
+
+
+
+
+
