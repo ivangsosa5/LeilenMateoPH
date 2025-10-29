@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContent } from '../../../shared/hooks/useContent';
-import Hero from '../../../componentes/hero/Hero';
+import Hero from './Hero';
+
 
 const HomePage = () => {
   const { content, loading, error } = useContent('homepage.md');
@@ -40,7 +41,7 @@ const HomePage = () => {
       />
 
       {/* About Section */}
-      <section className="py-20 bg-white">
+{/*       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -64,7 +65,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Gallery Preview Section */}
       <section className="py-20 bg-gray-50">

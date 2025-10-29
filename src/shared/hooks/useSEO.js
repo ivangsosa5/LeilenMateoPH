@@ -79,9 +79,3 @@ export const SEOConfigs = {
   }
 };
 
-
-
-
-
-
-

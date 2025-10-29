@@ -1,6 +1,6 @@
 import React from "react";
-import SEOHead from "../seo/SEOHead";
-import { usePageTracking, useGalleryTracking } from "../../hooks/useAnalytics";
+import SEOHead from "../../../shared/components/SEOHead";
+import { usePageTracking, useGalleryTracking } from "../../../shared/hooks/useAnalytics";
 
 const GaleriaPortfolio = () => {
   // Tracking de página y galería
@@ -45,3 +45,4 @@ const GaleriaPortfolio = () => {
 };
 
 export default GaleriaPortfolio;
+

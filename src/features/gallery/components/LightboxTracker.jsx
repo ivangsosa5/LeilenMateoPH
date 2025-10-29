@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAnalytics } from '../../hooks/useAnalytics';
+import { useAnalytics } from '../../../shared/hooks/useAnalytics';
 
 // Componente para tracking de lightbox
 const LightboxTracker = ({ 
@@ -34,7 +34,4 @@ const LightboxTracker = ({
 };
 
 export default LightboxTracker;
-
-
-
 

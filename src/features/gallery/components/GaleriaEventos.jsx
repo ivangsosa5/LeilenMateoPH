@@ -1,5 +1,5 @@
 import React from "react";
-import SEOHead from "../seo/SEOHead";
+import SEOHead from "../../../shared/components/SEOHead";
 
 const GaleriaEventos = () => {
   return (
@@ -20,10 +20,4 @@ const GaleriaEventos = () => {
 };
 
 export default GaleriaEventos;
-
-
-
-
-
-
 

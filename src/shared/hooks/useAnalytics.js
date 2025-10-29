@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import Plausible  from 'plausible-tracker';
-import { ANALYTICS_CONFIG, trackerConfig, isDevelopment } from '../config/analytics';
+import { ANALYTICS_CONFIG, trackerConfig, isDevelopment } from '../../config/analytics';
 
 // Inicializar Plausible tracker
 const plausible = new Plausible(trackerConfig);
@@ -136,13 +136,15 @@ export const useContactTracking = () => {
     trackContactEvent(ANALYTICS_CONFIG.events.WHATSAPP_CLICK, source);
   }, [trackContactEvent]);
 
+  const trackContactInterest = useCallback((source = 'link') => {
+    trackContactEvent(ANALYTICS_CONFIG.events.CONTACT_INTEREST, source);
+  }, [trackContactEvent]);
+
   return {
     trackFormStart,
     trackFormSubmit,
-    trackWhatsAppClick
+    trackWhatsAppClick,
+    trackContactInterest
   };
 };
-
-
-
 

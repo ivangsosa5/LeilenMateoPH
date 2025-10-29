@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SEOHead from "../seo/SEOHead";
-import { usePageTracking, useContactTracking } from "../../hooks/useAnalytics";
+import SEOHead from "../../../shared/components/SEOHead";
+import { usePageTracking, useContactTracking } from "../../../shared/hooks/useAnalytics";
 
 const Contacto = () => {
   const [formData, setFormData] = useState({
@@ -108,3 +108,4 @@ const Contacto = () => {
 };
 
 export default Contacto;
+

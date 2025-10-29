@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGalleryCategories } from '../../hooks/useContent';
+import { useGalleryCategories } from '../../../shared/hooks/useContent';
 
 const GalleryCategory = ({ categoryId }) => {
   const { categories, loading, error } = useGalleryCategories();

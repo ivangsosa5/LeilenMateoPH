@@ -1,7 +1,7 @@
 import React from "react";
-import SEOHead from "../seo/SEOHead";
+import SEOHead from "../../../shared/components/SEOHead";
 
-const SoyLeilen = () => {
+const AboutPage = () => {
   return (
     <>
       <SEOHead 
@@ -19,11 +19,5 @@ const SoyLeilen = () => {
   );
 };
 
-export default SoyLeilen;
-
-
-
-
-
-
+export default AboutPage;
 

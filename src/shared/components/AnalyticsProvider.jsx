@@ -68,6 +68,3 @@ const AnalyticsProvider = ({ children }) => {
 
 export default AnalyticsProvider;
 
-
-
-

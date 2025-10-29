@@ -1,14 +1,14 @@
 import React from 'react'
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen, fireEvent } from '../../test/test-utils'
-import { createMockPhoto } from '../../test/test-utils'
+import { render, screen, fireEvent } from '../../../../test/test-utils'
+import { createMockPhoto } from '../../../../test/test-utils'
 
 // Mock del hook useContent
-vi.mock('../../hooks/useContent', () => ({
+vi.mock('../../../../shared/hooks/useContent', () => ({
   useContent: vi.fn()
 }))
 
-// Importar el componente Hero (que aún no existe - fase RED)
+// Importar el componente Hero
 import Hero from './Hero'
 
 describe('Hero Component', () => {
