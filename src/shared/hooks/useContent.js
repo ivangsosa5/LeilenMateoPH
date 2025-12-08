@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import yaml from 'js-yaml';
 
 // Hook para cargar contenido desde los archivos markdown
 export const useContent = (contentPath) => {
@@ -64,52 +65,6 @@ export const useContent = (contentPath) => {
   return { content, loading, error };
 };
 
-// Hook para cargar galerías
-export const useGalleries = (category = null) => {
-  const [galleries, setGalleries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadGalleries = async () => {
-      try {
-        setLoading(true);
-        
-        // En un entorno real, esto cargaría desde una API o archivos
-        // Por ahora, simulamos la carga de galerías
-        const mockGalleries = [
-          {
-            id: 'sample-editorial-session',
-            title: 'Fashion Editorial - Spring Collection',
-            description: 'A vibrant fashion editorial showcasing spring colors and textures',
-            category: 'Editorial',
-            subcategory: 'Fashion Editorial',
-            featuredImage: '/images/galleries/editorial-spring/featured.jpg',
-            date: '2024-03-15T10:00:00.000Z',
-            published: true
-          }
-        ];
-        
-        const filteredGalleries = category 
-          ? mockGalleries.filter(gallery => gallery.category === category)
-          : mockGalleries;
-        
-        setGalleries(filteredGalleries);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        console.error('Error loading galleries:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadGalleries();
-  }, [category]);
-
-  return { galleries, loading, error };
-};
-
 // Hook para cargar categorías de galería
 export const useGalleryCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -120,7 +75,7 @@ export const useGalleryCategories = () => {
     const loadCategories = async () => {
       try {
         setLoading(true);
-        
+
         // Cargar categorías desde los archivos de contenido
         const categoryFiles = [
           'editorial.md',
@@ -128,20 +83,35 @@ export const useGalleryCategories = () => {
           'events.md',
           'product.md'
         ];
-        
+
         const loadedCategories = await Promise.all(
           categoryFiles.map(async (file) => {
             try {
               const response = await fetch(`/content/gallery-categories/${file}`);
               if (response.ok) {
-                const _text = await response.text();
-                // Parse frontmatter aquí
+                const text = await response.text();
+
+                // Parsear frontmatter YAML entre --- y ---
+                const match = text.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/);
+                let frontmatter = {};
+                let body = '';
+                if (match) {
+                  try {
+                    frontmatter = yaml.load(match[1]) || {};
+                  } catch(err) {
+                    console.warn('Could not parse YAML:', file, err);
+                  }
+                  body = match[2]?.trim();
+                }
                 return {
-                  id: file.replace('.md', ''),
-                  title: file.replace('.md', '').charAt(0).toUpperCase() + file.replace('.md', '').slice(1),
-                  description: `Description for ${file.replace('.md', '')}`,
-                  heroImage: `/images/${file.replace('.md', '')}-hero.jpg`,
-                  order: 1
+                  id: frontmatter.id || file.replace('.md', ''),
+                  slug: frontmatter.slug || file.replace('.md', ''),
+                  title: frontmatter.title || '',
+                  description: frontmatter.description || body || '',
+                  order: frontmatter.order || 1,
+                  heroImage: frontmatter.heroImage || null,
+                  subcategories: frontmatter.subcategories || [],
+                  photos: frontmatter.photos || []
                 };
               }
             } catch (err) {
@@ -150,7 +120,7 @@ export const useGalleryCategories = () => {
             return null;
           })
         );
-        
+
         setCategories(loadedCategories.filter(Boolean));
         setError(null);
       } catch (err) {
