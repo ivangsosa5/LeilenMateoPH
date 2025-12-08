@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContent } from '../../../shared/hooks/useContent';
-import Hero from './Hero';
+import Hero from './Hero/Hero';
+import { homepageContent } from '../config/homepageContent';
 
 
 const HomePage = () => {
@@ -25,80 +26,42 @@ const HomePage = () => {
     );
   }
 
-  const { metadata } = content || {};
-
+  
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <Hero
-        title={metadata?.heroTitle || 'Leilen Mateo'}
-        subtitle={metadata?.heroSubtitle || 'Professional Photography'}
-        backgroundImage={metadata?.heroImage}
-        ctaText="View Gallery"
-        ctaLink="/gallery"
-        loading={loading}
-        error={error}
+      <Hero 
+        titleImage={homepageContent.hero.titleImage}
+        backgroundImage={homepageContent.hero.backgroundImage}
+        satelliteImages={homepageContent.hero.satelliteImages}
       />
 
-      {/* About Section */}
-{/*       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                {metadata?.aboutTitle || 'About Leilen'}
-              </h2>
-              <div className="prose prose-lg text-gray-600">
-                {metadata?.aboutText && (
-                  <div dangerouslySetInnerHTML={{ __html: metadata.aboutText }} />
-                )}
-              </div>
-            </div>
-            <div>
-              {metadata?.aboutImage && (
-                <img
-                  src={metadata.aboutImage}
-                  alt="About Leilen"
-                  className="w-full h-96 object-cover rounded-lg shadow-lg"
-                />
-              )}
-            </div>
-          </div>
+      {/*Banner Section*/}
+      <section className="">
+        <div className=" mx-auto bg-[#f3efeb] h-[100vh] flex items-center justify-center">
+          <img src="/images/banner.svg" alt="Banner"/>
+          
         </div>
-      </section> */}
+      </section>
 
       {/* Gallery Preview Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Work</h2>
-            <p className="text-xl text-gray-600">Explore my latest photography sessions</p>
-          </div>
+      <section className="">
+        <div className=" mx-auto h-[100vh] flex items-center justify-center">
+          <a href="/gallery/editorial"><img src="/images/editorialHomeImg.svg" alt="Editorial Home" /></a>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Gallery preview cards would go here */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="aspect-square bg-gray-200"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Editorial Photography</h3>
-                <p className="text-gray-600">Creative and artistic sessions</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="aspect-square bg-gray-200"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Portfolio Sessions</h3>
-                <p className="text-gray-600">Professional headshots and portraits</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="aspect-square bg-gray-200"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Event Photography</h3>
-                <p className="text-gray-600">Weddings and special occasions</p>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className=" mx-auto bg-[#f3efeb] h-[100vh] flex items-center justify-center">
+          <a href="/gallery/portfolio"><img src="/images/portfolioHomeImg.svg" alt="Portfolio Home" /></a>
+          
+        </div>
+        <div className=" mx-auto h-[100vh] flex items-center justify-center">
+          <a href="/gallery/events"><img src="/images/eventosHomeImg.svg" alt="Eventos Home" /></a>
+        
+          
+        </div>
+        <div className=" mx-auto bg-[#f3efeb] h-[100vh] flex items-center justify-center">
+          <a href="/gallery/product"><img src="/images/fotoproductoHomeImg.svg" alt="Fotoproductos Home" /></a>          
+          
         </div>
       </section>
     </div>
