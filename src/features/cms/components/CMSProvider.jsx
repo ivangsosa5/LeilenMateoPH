@@ -1,18 +1,8 @@
-import React, { useEffect } from 'react';
-import CMS from 'netlify-cms-app';
+import React from 'react';
 
+// CMSProvider simplificado - solo provee el contexto
+// La inicialización real se hace en AdminPage
 const CMSProvider = ({ children }) => {
-  useEffect(() => {
-    // Initialize Netlify CMS
-    if (typeof window !== 'undefined') {
-      CMS.init({
-        config: {
-          load_config_file: true,
-        },
-      });
-    }
-  }, []);
-
   return <>{children}</>;
 };
 

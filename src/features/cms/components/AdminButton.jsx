@@ -7,8 +7,6 @@ const AdminButton = () => {
       <Link
         to="/admin"
         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center gap-2"
-        target="_blank"
-        rel="noopener noreferrer"
       >
         <svg 
           className="w-5 h-5" 

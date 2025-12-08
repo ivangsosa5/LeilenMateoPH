@@ -5,29 +5,7 @@ backend:
 media_folder: "public/images"
 public_folder: "/images"
 
-# Media library configuration
-media_library:
-  name: uploadcare
-  config:
-    publicKey: "demo"
-
 collections:
-  # Site Settings
-  - name: "site"
-    label: "Site Settings"
-    files:
-      - label: "Homepage"
-        name: "homepage"
-        file: "content/homepage.md"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Hero Title", name: "heroTitle", widget: "string"}
-          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
-          - {label: "Hero Image", name: "heroImage", widget: "image"}
-          - {label: "About Title", name: "aboutTitle", widget: "string"}
-          - {label: "About Text", name: "aboutText", widget: "markdown"}
-          - {label: "About Image", name: "aboutImage", widget: "image"}
-
   # Gallery Categories
   - name: "galleryCategories"
     label: "Gallery Categories"
@@ -46,21 +24,6 @@ collections:
           - {label: "Name", name: "name", widget: "string"}
           - {label: "Description", name: "description", widget: "text"}
           - {label: "Order", name: "order", widget: "number", default: 0}
-
-  # Photo Galleries
-  - name: "galleries"
-    label: "Photo Galleries"
-    folder: "content/galleries"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Category", name: "category", widget: "select", options: ["Editorial", "Portfolio", "Events", "Product Photography"]}
-      - {label: "Subcategory", name: "subcategory", widget: "string"}
-      - {label: "Featured Image", name: "featuredImage", widget: "image"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Published", name: "published", widget: "boolean", default: true}
       - label: "Photos"
         name: "photos"
         widget: "list"
@@ -68,6 +31,7 @@ collections:
           - {label: "Image", name: "image", widget: "image"}
           - {label: "Alt Text", name: "alt", widget: "string"}
           - {label: "Caption", name: "caption", widget: "string"}
+          - {label: "Subcategory", name: "subcategory", widget: "string"}
           - {label: "Order", name: "order", widget: "number", default: 0}
 
   # About Page
@@ -82,7 +46,11 @@ collections:
           - {label: "Content", name: "content", widget: "markdown"}
           - {label: "Profile Image", name: "profileImage", widget: "image"}
           - {label: "Experience", name: "experience", widget: "text"}
-          - {label: "Specialties", name: "specialties", widget: "list", field: {label: "Specialty", name: "specialty", widget: "string"}}
+          - label: "Specialties"
+            name: "specialties"
+            widget: "list"
+            fields:
+              - {label: "Specialty", name: "specialty", widget: "string"}
 
   # Contact Page
   - name: "contact"
