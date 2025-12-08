@@ -29,18 +29,20 @@ As a **developer**, I want to set up the project environment with Vite, React 19
 ### Story 0.2 — Netlify CMS Setup
 
 **User Story:**
-As a **developer/content manager**, I want Netlify CMS set up, so galleries and content can be easily maintained.
+As a **developer/content manager**, I want Netlify CMS set up, so gallery categories and their photos can be easily maintained.
 
 **Acceptance Criteria:**
 
 * Netlify CMS installed and connected to Git repository.
 * Content structure matches session types and subcategories.
-* Admin interface allows editing previews and full galleries.
+* Admin interface allows editing category metadata (title, description, heroImage, subcategories) and all photos within each category.
+* Each category contains all its photos in a single `.md` file (no separate gallery files).
 
 **Definition of Done:**
 
 * Changes made in CMS reflect correctly on the site.
 * User roles and permissions configured.
+* Category files include all photos with subcategory associations.
 
 **Responsible Agents:** scope-rule-architect
 **Priority:** High
@@ -132,21 +134,26 @@ As a **site visitor**, I want a brief “About Me” section, to understand the 
 
 ## Epic 2 – Gallery System
 
+**Note on Content Structure:**
+Each gallery category (Editorial, Portfolio, Events, Product Photography) contains all its photos in a single `.md` file. Photos include a `subcategory` field for filtering. Subcategory filtering is performed within the Lightbox component when viewing the expanded gallery. There are no separate "gallery" entities—only categories with their photos.
+
+---
+
 ### Story 2.1 — Gallery Index by Session Type
 
 **User Story:**
-As a **site visitor**, I want to browse galleries by session type (Editorial, Portfolio, Events, Product Photography), so I can quickly find the photo style I’m interested in.
+As a **site visitor**, I want to browse gallery categories by session type (Editorial, Portfolio, Events, Product Photography), so I can quickly find the photo style I'm interested in.
 
 **Acceptance Criteria:**
 
-* Each session type has an explanatory header.
-* Small preview grid visible on the index page.
-* Click expands to full gallery (filter not active yet).
+* Each session type (category) has an explanatory header.
+* Preview grid showing photos from the category visible on the index page.
+* Click expands to show all photos from the category (filter not active yet).
 
 **Definition of Done:**
 
-* Previews display correctly.
-* Clicking preview opens expanded gallery.
+* Category previews display correctly with photos from the category.
+* Clicking preview opens expanded view showing all photos from the category.
 
 **Responsible Agents:** scope-rule-architect, tdd-test-first, react-test-implementer, accessibility-auditor
 **Priority:** High
@@ -156,18 +163,19 @@ As a **site visitor**, I want to browse galleries by session type (Editorial, Po
 ### Story 2.2a — Expanded Gallery with Filter
 
 **User Story:**
-As a **site visitor**, I want to see the full gallery for a session type and filter by subcategory, so I can find specific photos within that category.
+As a **site visitor**, I want to see all photos from a category and filter by subcategory, so I can find specific photos within that category.
 
 **Acceptance Criteria:**
 
 * Category title and description visible.
-* All photos of the category loaded in expanded gallery.
-* Subcategory filter active only inside expanded gallery.
+* Expanded view shows a full-width grid with all photos of the category (no limit).
+* Subcategory filter visible in the expanded view (not in the Lightbox).
+* Applying a subcategory filter updates the grid to only those photos.
 
 **Definition of Done:**
 
-* Photos filtered correctly.
-* Gallery is responsive and accessible.
+* Photos filtered correctly by subcategory in the expanded view grid.
+* Grid uses the full available width and is responsive and accessible.
 
 **Responsible Agents:** scope-rule-architect, tdd-test-first, react-test-implementer, accessibility-auditor
 **Priority:** High
@@ -177,18 +185,20 @@ As a **site visitor**, I want to see the full gallery for a session type and fil
 ### Story 2.2b — Lightbox and Photo Navigation
 
 **User Story:**
-As a **site visitor**, I want to open a photo in a lightbox and navigate between images, to inspect details comfortably.
+As a **site visitor**, I want to open a photo in a lightbox and navigate between the photos currently shown in the expanded view, to inspect details cómodamente.
 
 **Acceptance Criteria:**
 
 * Lightbox opens on photo click.
 * Keyboard navigation: ESC closes, arrows navigate between photos.
+* Lightbox receives the already-filtered photo set from the expanded view (no filter UI inside Lightbox).
 * Focus trap and accessibility ensured.
 
 **Definition of Done:**
 
 * Lightbox functional and responsive.
-* Photo navigation works correctly and is accessible.
+* Photo navigation works correctly and is accessible over the currently filtered set.
+* No filter UI inside Lightbox; it respects the filter applied in the expanded view.
 
 **Responsible Agents:** tdd-test-first, react-test-implementer, accessibility-auditor
 **Priority:** High
@@ -223,18 +233,20 @@ As a **site visitor**, I want to fill out a contact form and preview the WhatsAp
 ### Story 4.1 — Gallery & Preview Management
 
 **User Story:**
-As a **photographer/developer**, I want to manage galleries and previews via Netlify CMS, to update content easily and quickly.
+As a **photographer/developer**, I want to manage gallery categories and their photos via Netlify CMS, to update content easily and quickly.
 
 **Acceptance Criteria:**
 
-* CMS allows editing category headers and previews.
-* Main galleries linked correctly.
-* Subcategory filters configurable.
+* CMS allows editing category metadata (title, description, heroImage, subcategories) and all photos within each category.
+* Photos are correctly associated with their category and subcategory.
+* Each category has a single `.md` file containing all its photos (no separate gallery files).
+* Subcategory filters configurable through photo subcategory field.
 
 **Definition of Done:**
 
 * CMS changes reflected on site.
 * No broken links or missing images.
+* All photos within a category are accessible and correctly associated with subcategories.
 
 **Responsible Agents:** scope-rule-architect
 **Priority:** High

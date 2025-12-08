@@ -1,7 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --font-benton-modern-display: "benton-modern-display", serif;
+  --font-benton-modern-display-compressed: "benton-modern-display-compre", serif;
+  --font-benton-modern-display-condensed: "benton-modern-display-conden", serif;
+  --font-benton-modern-display-extra-condensed: "benton-modern-display-extra", serif;
+  --font-parfumerie: "parfumerie-script", sans-serif;
+  --font-the-seasons: "the-seasons", sans-serif;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-benton-modern-display);
+  font-weight: 400;
+  font-style: normal;
+
   line-height: 1.5;
   font-weight: 400;
 
