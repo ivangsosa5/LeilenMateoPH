@@ -9,7 +9,7 @@ const GalleryGrid = ({ category = null, limit = null, onImageClick = null }) => 
       </div>
     );
   }
-  console.log(category);
+
   // Ordenar fotos por order y aplicar limit si existe
   const sortedPhotos = [...category.photos].sort((a, b) => (a.order || 0) - (b.order || 0));
   const displayPhotos = limit ? sortedPhotos.slice(0, limit) : sortedPhotos;

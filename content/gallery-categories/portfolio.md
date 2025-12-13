@@ -41,9 +41,5 @@ photos:
     alt: "Full body shot in garden setting"
     caption: "Garden setting with natural backdrop"
     order: 7
-  - image: "/images/portfolioGalleryImages/portfolio8.webp"
-    alt: "Full body shot in garden setting"
-    caption: "Garden setting with natural backdrop"
-    order: 8
 ---
 
