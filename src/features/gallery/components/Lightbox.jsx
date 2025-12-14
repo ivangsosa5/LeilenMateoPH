@@ -1,4 +1,4 @@
-cdimport React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 const Lightbox = ({ 
   isOpen, 

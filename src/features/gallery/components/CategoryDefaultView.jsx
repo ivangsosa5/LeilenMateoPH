@@ -48,7 +48,7 @@ const CategoryDefaultView = ({
         <GalleryGrid 
           category={category}
           limit={previewLimit}
-          onPhotoClick={onPhotoClick}
+          onPhotoClick={(photo) => onPhotoClick && onPhotoClick(photo, category?.photos || [])}
         />
         
         <div className="mt-8 flex justify-center">

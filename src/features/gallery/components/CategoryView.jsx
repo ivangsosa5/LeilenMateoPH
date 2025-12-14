@@ -3,6 +3,7 @@ import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { useGalleryCategories } from '../../../shared/hooks/useContent';
 import CategoryDefaultView from './CategoryDefaultView';
 import CategoryExpandedView from './CategoryExpandedView';
+import Lightbox from './Lightbox';
 
 const CategoryView = ({ 
   category: categoryProp,
@@ -19,6 +20,11 @@ const CategoryView = ({
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const expanded = searchParams.get('view') === 'expanded';
+
+  // Lightbox State
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Load category data
   const { categories, loading: loadingHook, error: errorHook } = useGalleryCategories();
@@ -39,6 +45,31 @@ const CategoryView = ({
 
   const handleCollapseClick = () => {
     navigate('?', { replace: false });
+  };
+
+  const handlePhotoClick = (photo, images) => {
+    const list = images || category?.photos || [];
+    // Try finding by ID first, fallback to image URL, fallback to 0
+    let index = list.findIndex(p => p.id && p.id === photo.id);
+    if (index === -1) {
+      index = list.findIndex(p => p.image === photo.image);
+    }
+    
+    setLightboxImages(list);
+    setCurrentIndex(index !== -1 ? index : 0);
+    setLightboxOpen(true);
+    
+    if (onPhotoClick) onPhotoClick(photo, list);
+  };
+
+  const handleLightboxClose = () => setLightboxOpen(false);
+
+  const handleLightboxNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % lightboxImages.length);
+  };
+
+  const handleLightboxPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
   };
 
   if (loading) {
@@ -79,7 +110,7 @@ const CategoryView = ({
   const viewProps = {
     category,
     photos: photosProp, // Optional override
-    onPhotoClick,
+    onPhotoClick: handlePhotoClick,
   };
 
   return (
@@ -97,6 +128,15 @@ const CategoryView = ({
           onNavigate={onNavigate}
         />
       )}
+      
+      <Lightbox 
+        isOpen={lightboxOpen}
+        onClose={handleLightboxClose}
+        images={lightboxImages}
+        currentIndex={currentIndex}
+        onNext={handleLightboxNext}
+        onPrevious={handleLightboxPrev}
+      />
     </div>
   );
 };

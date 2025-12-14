@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GalleryGrid = ({ category = null, limit = null, onImageClick = null }) => {
+const GalleryGrid = ({ category = null, limit = null, onPhotoClick = null }) => {
   // Si no hay categoría o no tiene fotos, mostrar estado vacío
   if (!category || !category.photos || category.photos.length === 0) {
     return (
@@ -15,8 +15,13 @@ const GalleryGrid = ({ category = null, limit = null, onImageClick = null }) => 
   const displayPhotos = limit ? sortedPhotos.slice(0, limit) : sortedPhotos;
 
   const handleImageClick = (photo, index) => {
-    if (onImageClick) {
-      onImageClick(photo, index);
+    if (onPhotoClick) {
+      onPhotoClick(photo, index); // Note: GalleryGrid passes (photo, index) but CategoryView expects (photo, images)
+      // Wait! CategoryDefaultView WRAPS this: (photo) => onPhotoClick(photo, category.photos)
+      // So GalleryGrid passing (photo, index) is fine if wrapper ignores index.
+      // But we should verify.
+      // CategoryDefaultView: (photo) => onPhotoClick && onPhotoClick(photo, category?.photos || [])
+      // Wrapper takes 1 arg (photo). Ignores index. This is correct.
     }
   };
 

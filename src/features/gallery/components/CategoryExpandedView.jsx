@@ -21,6 +21,7 @@ function getCategoryInfoComponent(categorySlug, showDescription = false) {
   }
 }
 
+
 const CategoryExpandedView = ({ 
   category, 
   photos: photosProp, 
@@ -35,6 +36,8 @@ const CategoryExpandedView = ({
   // Get unique subcategories
   const subcategories = category?.subcategories || 
     [...new Set(photos.map(p => p.subcategory))].filter(Boolean).map(s => ({ id: s, name: s.charAt(0).toUpperCase() + s.slice(1) }));
+
+  console.log(subcategories)
 
   // Filter photos
   const filteredPhotos = selectedSubcategory
@@ -52,10 +55,10 @@ const CategoryExpandedView = ({
   return (
     <section 
       data-testid="category-expanded-view"
-      className="grid grid-cols-1 md:gap-8 px-4 md:px-6 lg:px-30 w-full py-10"
+      className="grid grid-cols-1 md:gap-8 px-4 md:px-6 lg:px-30 w-full mt-20"
       aria-label={`${category?.title} expanded view`}
     >
-      <div className="mb-8 cursor-pointer" onClick={onCollapseClick}>
+      <div className="cursor-pointer mt-6" onClick={onCollapseClick}>
          {/* Show only title, no description */}
         {getCategoryInfoComponent(category?.slug, false)}
       </div>
@@ -95,20 +98,8 @@ const CategoryExpandedView = ({
 
         <div data-testid="gallery-grid-wrapper" data-subcategory={selectedSubcategory || ''}>
           <GalleryGrid 
-            category={{ ...category, photos: filteredPhotos }} // Pass filtered photos masquerading as category photos or use photos prop if GalleryGrid supports it better?
-            // Actually GalleryGrid prefers 'category' prop or 'photos' prop maybe? 
-            // My previous read showed: const sourcePhotos = photos.length > 0 ? ...
-            // So if I pass photos={filteredPhotos} it should work.
-            // But let's check current GalleryGrid signature from the diff I saw earlier:
-            // const GalleryGrid = ({ category = null, limit = null, onImageClick = null }) => {
-            //   if (!category || !category.photos ...
-            // It ONLY takes category and limit. It removed photos prop!
-            // Wait, I saw a diff earlier:
-            // - const GalleryGrid = ({ ... photos = [], ...
-            // + const GalleryGrid = ({ category = null, limit = null, onImageClick = null }) => {
-            // So I MUST pass a constructed category object with the filtered photos.
-            // category={{ ...category, photos: filteredPhotos }}  is the correct approach.
-            onImageClick={handleGridPhotoClick}
+            category={{ ...category, photos: filteredPhotos }}
+            onPhotoClick={handleGridPhotoClick}
             limit={null}
           />
         </div>
