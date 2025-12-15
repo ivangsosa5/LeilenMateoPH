@@ -207,21 +207,44 @@ As a **site visitor**, I want to open a photo in a lightbox and navigate between
 
 ## Epic 3 – Contact Page + WhatsApp Integration
 
-### Story 3.1 — Contact Form & Dynamic Message
+### Story 3.1 — Contact Page Layout & Structure
 
 **User Story:**
-As a **site visitor**, I want to fill out a contact form and preview the WhatsApp message dynamically, to send inquiries quickly.
+As a **site visitor**, I want to access a dedicated contact page with a clear layout and visual hierarchy, so I can find the way to communicate that suits me best.
 
 **Acceptance Criteria:**
-
-* Form fields: Name, Session Type, Estimated Date (Year/Month).
-* Dynamic preview updates as fields are filled.
-* WhatsApp CTA opens with prefilled message.
+*   **Route:** Page accessible at `/contact`.
+*   **Header:** Title "Contact" visible at the top, center justified.
+*   **Layout:**
+    *   Responsive Grid Layout: Two columns on Desktop, Stacked on Mobile.
+    *   **Left Side (Form Container):** Visible with subtitle "¿Queres agendar o tenes una consulta?".
+    *   **Right Side (Preview Container):** Visible placeholder for WhatsApp preview.
+*   **Footer:** Section visible at bottom with subtitle "También podés contactarme vía redes!" and social network icons below.
 
 **Definition of Done:**
+*   Page renders responsively (Grid desktop / Stack mobile).
+*   All titles and subtitles are accurate to specifications.
+*   Social icons are navigable.
 
-* Form sends correctly to WhatsApp URL.
-* Validation prevents empty fields.
+**Responsible Agents:** scope-rule-architect, react-test-implementer
+**Priority:** High
+
+### Story 3.2 — Contact Form Logic & WhatsApp Integration
+
+**User Story:**
+As a **site visitor**, I want to fill out a contact form and see the WhatsApp message preview update in real-time, to ensure my inquiry is clear before sending.
+
+**Acceptance Criteria:**
+*   **Form Fields:** Name, Session Type, Estimated Date (Year/Month).
+*   **Dynamic Logic:** Preview area (right column) updates in real-time as fields are filled.
+*   **Action:** "Enviar WhatsApp" button generates a valid `wa.me` URL with the encoded dynamic message.
+*   **Validation:** Prevents sending with empty required fields.
+*   **Integration:** Components placed correctly into the layout containers defined in Story 3.1.
+
+**Definition of Done:**
+*   Unit tests passing for message generation logic (TDD).
+*   Form works correctly within the page layout.
+*   Clicking "Enviar WhatsApp" opens the app with the correct pre-filled text.
 
 **Responsible Agents:** tdd-test-first, react-test-implementer, security-auditor
 **Priority:** High
@@ -351,4 +374,8 @@ As a **site visitor**, I want to switch between English and Spanish, to read con
 | 0.4 | Plausible Analytics Integration | scope-rule-architect, react-mentor                           | High     |
 | 1.1 | Hero Section                    | scope-rule-architect, tdd-test-first, react-test-implementer | High     |
 | 1.2 | About the Photographer Section  | scope-rule-architect, react-test-implementer                 | Medium   |
-| 2.1 | Gallery Index by Session Type   | scope-r                                                      |          |
+| 2.1 | Gallery Index by Session Type   | scope-rule-architect, tdd-test-first, react-test-implementer, accessibility-auditor | High     |
+| 2.2a| Expanded Gallery with Filter    | scope-rule-architect, tdd-test-first, react-test-implementer, accessibility-auditor | High     |
+| 2.2b| Lightbox and Photo Navigation   | tdd-test-first, react-test-implementer, accessibility-auditor | High     |
+| 3.1 | Contact Page Layout & Structure | scope-rule-architect, react-test-implementer                 | High     |
+| 3.2 | Contact Form Logic & WhatsApp   | tdd-test-first, react-test-implementer, security-auditor     | High     |

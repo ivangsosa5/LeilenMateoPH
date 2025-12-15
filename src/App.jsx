@@ -7,6 +7,7 @@ import AdminButton from './features/cms/components/AdminButton';
 import CMSProvider from './features/cms/components/CMSProvider';
 import AdminPage from './features/cms/components/AdminPage';
 import CategoryView from './features/gallery/components/CategoryView';
+import Contact from './features/contact/components/Contact';
 import './App.css';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/gallery/:categorySlug" element={<CategoryView />} />
-              {/* Add more routes as needed */}
+              <Route path="/contact" element={<Contact/>} />
             </Routes>
           </main>
           <Footer />

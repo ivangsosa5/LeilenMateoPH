@@ -104,7 +104,7 @@ const Lightbox = ({
         <img
           src={currentImage.image}
           alt={currentImage.alt || `Gallery image ${currentIndex + 1}`}
-          className="max-w-full max-h-full object-contain"
+          className="max-w-full max-h-screen object-contain"
           loading="lazy"
         />
         
