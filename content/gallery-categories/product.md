@@ -1,5 +1,5 @@
 ---
-title: "Product Photography"
+title: "Fotoproducto"
 description: "Producciones que Transforman Ideas en imágenes listas para transmitir conceptos o dar vida a artículos editoriales."
 order: 4
 subcategories:

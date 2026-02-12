@@ -6,17 +6,17 @@ describe('generateWhatsAppMessage', () => {
     const data = {
       name: 'Maria Perez',
       sessionType: 'Editorial',
-      estimatedDate: '2023-10',
+      estimatedDate: 'Mayo 2024',
       message: 'Quiero fotos en exterior.'
     };
     
     const result = generateWhatsAppMessage(data);
     
     expect(result).toContain('Hola Leilen!');
-    expect(result).toContain('Maria Perez');
-    expect(result).toContain('Editorial');
-    expect(result).toContain('2023-10');
-    expect(result).toContain('Quiero fotos en exterior.');
+    expect(result).toContain('Soy Maria Perez');
+    expect(result).toContain('quiero más info sobre las sesiones de Editorial');
+    expect(result).toContain('Fecha estimada: Mayo 2024');
+    expect(result).toContain('Mensaje adicional: Quiero fotos en exterior.');
   });
 
   it('generates message with placeholders when fields are missing', () => {
@@ -29,9 +29,9 @@ describe('generateWhatsAppMessage', () => {
     
     const result = generateWhatsAppMessage(data);
     
-    expect(result).toContain('[Tu nombre]');
-    expect(result).toContain('[Selecciona tipo]');
-    expect(result).toContain('[Mes/Año]');
+    expect(result).toContain('Soy _________');
+    expect(result).toContain('sesiones de _________');
+    expect(result).toContain('Fecha estimada: _________');
     expect(result).not.toContain('Mensaje adicional:');
   });
 

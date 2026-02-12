@@ -9,7 +9,7 @@ const CategoryInfoEditorial = ({ showDescription = true }) => (
       <span>orial</span>
     </h2>
     {showDescription && (
-      <p className="text-lg md:text-xl lg:text-2xl text-justify ">
+      <p className="text-lg md:text-lg lg:text-xl text-justify ">
           Producciones que 
           <span className='italic'> Transforman Ideas </span>
           en imágenes listas para transmitir conceptos o 

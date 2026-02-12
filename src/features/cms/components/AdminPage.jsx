@@ -103,53 +103,57 @@ const AdminPage = () => {
     };
   }, []); // Array de dependencias vacío - solo ejecutar una vez
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando CMS...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-red-50">
-        <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Error cargando CMS</h1>
-          <p className="text-gray-700 mb-4">{error}</p>
-          <div className="bg-gray-100 p-4 rounded">
-            <p className="text-sm text-gray-600 mb-2">Verifica:</p>
-            <ul className="text-sm text-gray-600 list-disc list-inside space-y-1">
-              <li>Que el archivo <code className="bg-gray-200 px-1 rounded">public/admin/config.yml</code> exista</li>
-              <li>Que el archivo tenga sintaxis YAML válida</li>
-              <li>Que todas las propiedades requeridas estén presentes</li>
-              <li>Que el servidor se haya reiniciado después de cambiar vite.config.js</li>
-            </ul>
-          </div>
-          <button
-            onClick={() => {
-              cmsInitialized = false; // Resetear para permitir reintentar
-              window.location.reload();
-            }}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-          >
-            Recargar página
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div 
-      id="nc-root" 
-      ref={containerRef}
-      className="min-h-screen flex items-center justify-center"
-    >
-      {/* Netlify CMS se renderizará automáticamente aquí */}
+    <div className="relative min-h-screen w-full mt-20">
+      <div 
+        id="nc-root" 
+        ref={containerRef}
+        className="min-h-screen"
+      >
+        {/* Netlify CMS se renderizará automáticamente dentro de este div por el ID nc-root */}
+      </div>
+
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 font-medium">Cargando CMS...</p>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="fixed inset-0 flex items-center justify-center bg-red-50 z-[9999] p-6">
+          <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-2xl border border-red-100">
+            <h1 className="text-2xl font-bold text-red-600 mb-4 flex items-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Error cargando CMS
+            </h1>
+            <p className="text-gray-700 mb-6 bg-red-50 p-3 rounded text-sm italic border-l-4 border-red-400">
+              {error}
+            </p>
+            <div className="bg-gray-50 p-4 rounded-md border border-gray-200 text-left mb-6">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Sugerencias:</p>
+              <ul className="text-sm text-gray-600 list-disc list-inside space-y-2">
+                <li>Verifica que <code className="bg-gray-200 px-1 rounded text-red-600">public/admin/config.yml</code> exista.</li>
+                <li>Comprueba la sintaxis YAML.</li>
+                <li>Asegúrate de que el proxy esté activo: <code className="bg-gray-800 text-white px-2 py-0.5 rounded text-xs select-all">npm run cms:proxy</code></li>
+              </ul>
+            </div>
+            <button
+              onClick={() => {
+                cmsInitialized = false;
+                window.location.reload();
+              }}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md active:scale-[0.98]"
+            >
+              Reintentar Carga
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -5,11 +5,12 @@ import ContactForm from "./ContactForm";
 import WhatsappPreview from "./WhatsappPreview";
 import { generateWhatsAppMessage } from "../utils/whatsappGenerator";
 
-const Contacto = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     sessionType: '',
-    estimatedDate: '',
+    estimatedMonth: '',
+    estimatedYear: '',
     message: ''
   });
 
@@ -43,6 +44,8 @@ const Contacto = () => {
     window.open(whatsappUrl, '_blank');
   };
 
+  console.log(whatsappMessage)
+
   return (
     <>
       <SEOHead 
@@ -53,8 +56,8 @@ const Contacto = () => {
         image="/og-contacto.jpg"
       />
       <div className="container mx-auto px-4 lg:mt-30">
-        <h1 className="text-4xl text-center mb-12 lg:text-8xl">Con<span className="italic">tac</span>to</h1>
-        
+        {/* <h1 className="text-4xl text-center mb-12 lg:text-8xl">Con<span className="italic">tac</span>to</h1> */}
+        <img src="/images/contactImages/contactTitleImage.svg" alt="contactTitle" className="mx-auto mb-12"/>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto">
           {/* Left Column: Form */}
           <div className="w-full">
@@ -66,8 +69,11 @@ const Contacto = () => {
           </div>
 
           {/* Right Column: Preview */}
-          <div className="w-full">
+          <div className="w-full relative">
             <WhatsappPreview message={whatsappMessage} />
+            <div className="absolute top-15 right-10">
+              <img src="/images/contactImages/yourmessage.svg" alt="" />
+            </div>
           </div>
         </div>
 
@@ -86,5 +92,5 @@ const Contacto = () => {
   );
 };
 
-export default Contacto;
+export default Contact;
 

@@ -1,16 +1,22 @@
 import React from 'react';
 import GenericButton from '../../../shared/components/GenericButton';
 
+const months = [
+  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+
+const currentYear = new Date().getFullYear();
+const years = [currentYear, currentYear + 1, currentYear + 2];
+
 const ContactForm = ({ formData, onChange, onSubmit }) => {
+
   return (
     <div className="p-6 md:p-8 w-full flex flex-col items-center">
-      <h2 className="text-2xl md:text-3xl text-gray-900 mb-2 italic">¿Queres agendar o tenes una consulta?</h2>
+      <h2 className="text-2xl md:text-3xl text-gray-900 mb-6 italic text-center">¿Querés agendar o tenés una consulta?</h2>
       
-      <form onSubmit={onSubmit} className="space-y-6 w-full">
+      <form onSubmit={onSubmit} className="space-y-6 w-full max-w-lg text-xl">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            
-          </label>
           <input
             type="text"
             id="name"
@@ -18,22 +24,20 @@ const ContactForm = ({ formData, onChange, onSubmit }) => {
             value={formData.name}
             onChange={onChange}
             required
-            className="w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 text-gray-700 italic"
             placeholder="Tu nombre completo"
           />
         </div>
 
         <div>
-          <label htmlFor="sessionType" className="block text-sm font-medium text-gray-700 mb-2">
-          
-          </label>
           <select
             id="sessionType"
             name="sessionType"
             value={formData.sessionType}
             onChange={onChange}
             required
-            className="w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500"
+            className={`w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 ${formData.sessionType ? 'text-gray-700' : 'text-gray-400'} italic`}
+            
           >
             <option value="">Selecciona un tipo de sesión</option>
             <option value="Editorial">Editorial</option>
@@ -43,23 +47,40 @@ const ContactForm = ({ formData, onChange, onSubmit }) => {
           </select>
         </div>
 
-        <div>
-          <label htmlFor="estimatedDate" className="block text-sm font-medium text-gray-700 mb-2">
-            Fecha estimada *
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-400 italic text-md">
+            Fecha estimada
           </label>
-          <input
-            type="month"
-            id="estimatedDate"
-            name="estimatedDate"
-            value={formData.estimatedDate}
-            onChange={onChange}
-            required
-            className="w-full px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div className="flex gap-4">
+            <select
+              name="estimatedMonth"
+              value={formData.estimatedMonth}
+              onChange={onChange}
+              required
+              className={`flex-1 px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 ${formData.estimatedMonth ? 'text-gray-700' : 'text-gray-400'} italic`}
+            >
+              <option value="">Mes</option>
+              {months.map((m, i) => (
+                <option key={m} value={m}>{m}</option>
+              ))}
+            </select>
+            <select
+              name="estimatedYear"
+              value={formData.estimatedYear}
+              onChange={onChange}
+              required
+              className={`flex-1 px-3 py-2 border-b border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 ${formData.estimatedYear ? 'text-gray-700' : 'text-gray-400'} italic`}
+            >
+              <option value="">Año</option>
+              {years.map(y => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2 italic text-md">
             Mensaje adicional
           </label>
           <textarea
@@ -68,8 +89,8 @@ const ContactForm = ({ formData, onChange, onSubmit }) => {
             value={formData.message}
             onChange={onChange}
             rows={4}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Cuéntame más sobre tu proyecto..."
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-700 italic text-gray-700"
+            placeholder="Contame más sobre tu proyecto..."
           />
         </div>
         <div className="w-full flex justify-center">

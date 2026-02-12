@@ -2,9 +2,11 @@
 
 @theme {
   --font-benton-modern-display: "benton-modern-display", serif;
-  --font-benton-modern-display-compressed: "benton-modern-display-compre", serif;
+  --font-benton-modern-display-compressed:
+    "benton-modern-display-compre", serif;
   --font-benton-modern-display-condensed: "benton-modern-display-conden", serif;
-  --font-benton-modern-display-extra-condensed: "benton-modern-display-extra", serif;
+  --font-benton-modern-display-extra-condensed:
+    "benton-modern-display-extra", serif;
   --font-parfumerie: "parfumerie-script", sans-serif;
   --font-the-seasons: "the-seasons", sans-serif;
 }
@@ -27,7 +29,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 body {
   margin: 0;
   display: flex;
@@ -36,3 +37,51 @@ body {
   min-height: 100vh;
 }
 
+/* Utility to force web theme on specific components like NavBar inside Admin */
+.theme-force-web,
+.theme-force-web * {
+  font-family: var(--font-the-seasons), serif !important;
+}
+
+.theme-force-web:not(.is-transparent) {
+  background-color: #f3efeb !important;
+}
+
+/* Modifier for Transparent NavBar (overrides the force-web default) */
+.theme-force-web.is-transparent {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.theme-force-web .logo {
+  font-size: 1.5rem !important;
+}
+
+.theme-force-web.is-transparent .logo {
+  color: #f3efeb !important;
+}
+
+.theme-force-web .nav-link {
+  font-size: 1.125rem !important;
+  color: #374151 !important;
+}
+
+.theme-force-web.is-transparent .nav-link {
+  color: #f3efeb !important;
+}
+
+.theme-force-web.is-transparent .nav-link:hover {
+  color: white !important;
+}
+
+.theme-force-web *:hover {
+  color: #030712 !important;
+  transition: color 0.5s ease-in-out;
+}
+
+.theme-force-web .font-the-seasons,
+.theme-force-web .font-the-seasons * {
+  font-family:
+    var(--font-the-seasons), var(--font-benton-modern-display), serif !important;
+}

@@ -1,5 +1,5 @@
 ---
-title: "Editorial Photography"
+title: "Editorial"
 description: "Producciones que Transforman Ideas en imágenes listas para transmitir conceptos o dar vida a artículos editoriales."
 order: 1
 subcategories:

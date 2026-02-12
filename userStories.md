@@ -112,23 +112,25 @@ As a **site visitor**, I want to see a hero section with the photographer's name
 
 ---
 
-### Story 1.2 — About the Photographer Section
+### Story 1.2 — Scroll Animation & Sticky Hero
 
 **User Story:**
-As a **site visitor**, I want a brief “About Me” section, to understand the photographer's experience and style.
+As a **site visitor**, I want to experience a dynamic Hero section where the title remains fixed while images move with parallax, so the introduction feels immersive and high-end.
 
 **Acceptance Criteria:**
-
-* Content editable via CMS.
-* Includes profile image.
-* Responsive layout.
+*   **Sticky Content:** The `titleImage` remains fixed at the exact center of the viewport during the initial scroll.
+*   **Parallax Satellite Images:** Satellite images move upwards with different speeds (parallax effect) as the user scrolls.
+*   **Collision Avoidance:** Parallax speeds and initial positions ensure that satellite images do not overlap with each other.
+*   **Section Transition:** The Hero section has enough height (e.g., 200vh - 300vh) to accommodate the animation.
+*   **Release Logic:** When the last satellite image (the one starting lowest in the section) reaches the title's position, the title is "released" from its fixed position and scrolls up naturally with the rest of the Home page content.
 
 **Definition of Done:**
+*   Smooth transition between fixed and scrolling states for the title.
+*   No visual overlaps between satellite images during the animation.
+*   Animation works correctly on desktop (Mobile version postponed).
 
-* Section visible on **“Soy Leilen” page** and editable via CMS.
-
-**Responsible Agents:** scope-rule-architect, react-test-implementer
-**Priority:** Medium
+**Responsible Agents:** scope-rule-architect, react-mentor, react-test-implementer
+**Priority:** High
 
 ---
 
@@ -250,17 +252,44 @@ As a **site visitor**, I want to fill out a contact form and see the WhatsApp me
 **Priority:** High
 
 ---
+## Epic 4 – About Section
 
-## Epic 4 – CMS Integration
+### Story 4.1 — About the Photographer (Editorial Layout)
 
-### Story 4.1 — Gallery & Preview Management
+**User Story:**
+As a **site visitor**, I want an “About Me” section with an editorial diary aesthetic, so I can understand the photographer's experience and style in a visually engaging way.
+
+**Acceptance Criteria:**
+*   **Title:** Rendered as a static image (not editable via CMS) with text "¿Quién está detrás de la Cámara?".
+*   **Layout:** Two-column grid on desktop.
+*   **Column 1 (Left):** 
+    *   Title image positioned at the top-left.
+    *   Descriptive text wraps around the title image to the right and continues below it.
+    *   Typography: Uses `--font-benton-modern-display`.
+    *   Alignment: Text is justified.
+*   **Column 2 (Right):** Profile image with the same width as the text in Column 1 and a height of approximately 75vh.
+*   **Aesthetic:** Editorial diary/magazine style.
+*   **CMS:** Description text and Profile Image must be editable.
+*   **Responsive:** Layout collapses gracefully for mobile/tablet.
+
+**Definition of Done:**
+*   Layout matches the "editorial diary" specification on desktop.
+*   Assets and text are successfully loaded from CMS (or localized markdown).
+*   Responsive behavior verified.
+
+**Responsible Agents:** scope-rule-architect, react-test-implementer
+**Priority:** Medium
+
+## Epic 5 – CMS Integration
+
+### Story 5.1 — Gallery & Preview Management
 
 **User Story:**
 As a **photographer/developer**, I want to manage gallery categories and their photos via Netlify CMS, to update content easily and quickly.
 
 **Acceptance Criteria:**
 
-* CMS allows editing category metadata (title, description, heroImage, subcategories) and all photos within each category.
+* CMS allows editing all photos within each category.
 * Photos are correctly associated with their category and subcategory.
 * Each category has a single `.md` file containing all its photos (no separate gallery files).
 * Subcategory filters configurable through photo subcategory field.
@@ -276,9 +305,9 @@ As a **photographer/developer**, I want to manage gallery categories and their p
 
 ---
 
-## Epic 5 – SEO, Analytics & Accessibility
+## Epic 6 – SEO, Analytics & Accessibility
 
-### Story 5.1 — Accessibility Compliance
+### Story 6.1 — Accessibility Compliance
 
 **User Story:**
 As a **site visitor**, I want the site to meet WCAG 2.1 AA standards, so it’s usable by everyone.
@@ -299,7 +328,7 @@ As a **site visitor**, I want the site to meet WCAG 2.1 AA standards, so it’s 
 
 ---
 
-### Story 5.2 — SEO & Open Graph
+### Story 6.2 — SEO & Open Graph
 
 **User Story:**
 As a **site visitor**, I want meta tags and previews correct, so pages are well represented in search engines and social media.
@@ -320,7 +349,7 @@ As a **site visitor**, I want meta tags and previews correct, so pages are well 
 
 ---
 
-### Story 5.3 — Plausible Analytics
+### Story 6.3 — Plausible Analytics
 
 **User Story:**
 As a **developer**, I want Plausible Analytics to capture key events, to understand visitor behavior while respecting privacy.
@@ -341,9 +370,9 @@ As a **developer**, I want Plausible Analytics to capture key events, to underst
 
 ---
 
-## Epic 6 – Future Enhancements / Multilingual Support
+## Epic 7 – Future Enhancements / Multilingual Support
 
-### Story 6.1 — Multilingual Pages
+### Story 7.1 — Multilingual Pages
 
 **User Story:**
 As a **site visitor**, I want to switch between English and Spanish, to read content in my preferred language.
@@ -379,3 +408,4 @@ As a **site visitor**, I want to switch between English and Spanish, to read con
 | 2.2b| Lightbox and Photo Navigation   | tdd-test-first, react-test-implementer, accessibility-auditor | High     |
 | 3.1 | Contact Page Layout & Structure | scope-rule-architect, react-test-implementer                 | High     |
 | 3.2 | Contact Form Logic & WhatsApp   | tdd-test-first, react-test-implementer, security-auditor     | High     |
+| 1.3 | Scroll Animation & Sticky Hero  | scope-rule-architect, react-mentor, react-test-implementer | High     |
