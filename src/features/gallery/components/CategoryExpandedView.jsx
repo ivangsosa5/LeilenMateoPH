@@ -55,7 +55,7 @@ const CategoryExpandedView = ({
   return (
     <section 
       data-testid="category-expanded-view"
-      className="grid grid-cols-1 md:gap-8 px-4 md:px-6 lg:px-30 w-full mt-20"
+      className="grid grid-cols-1 md:gap-8 px-4 md:px-6 lg:px-30 w-full mt-20 animate-fade-in"
       aria-label={`${category?.title} expanded view`}
     >
       <div className="cursor-pointer mt-6" onClick={onCollapseClick}>
@@ -66,6 +66,12 @@ const CategoryExpandedView = ({
       <div className="w-full">
         {/* Filter UI */}
         <div data-testid="subcategory-filter" className="flex flex-wrap gap-4 mb-6">
+          <div className="flex justify-center">
+          <ExpandButton 
+            onClick={onCollapseClick} 
+            expanded={true}
+          />
+        </div>
           <button
             data-testid="subcategory-filter-option"
             onClick={() => setSelectedSubcategory(null)}
@@ -101,13 +107,6 @@ const CategoryExpandedView = ({
             category={{ ...category, photos: filteredPhotos }}
             onPhotoClick={handleGridPhotoClick}
             limit={null}
-          />
-        </div>
-
-        <div className="mt-8 flex justify-center">
-          <ExpandButton 
-            onClick={onCollapseClick} 
-            expanded={true}
           />
         </div>
       </div>
